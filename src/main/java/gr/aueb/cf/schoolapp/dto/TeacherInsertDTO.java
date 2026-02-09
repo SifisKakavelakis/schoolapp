@@ -6,18 +6,24 @@ import jakarta.validation.constraints.Size;
 
 public record TeacherInsertDTO(
 
-        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
-        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
+//        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
+        @NotNull
+        @Size
+//        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
         String firstname,
 
-        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
-        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
+//        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
+//        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
+        @NotNull
+        @Size
         String lastname,
 
-        @Pattern(regexp = "\\d{9,}", message = "Το ΑΦΜ δεν μπορεί να είναι μικρότερο απο εννέα ψηφία.")
+        @Pattern(regexp = "\\d{9,}")
+//        @Pattern(regexp = "\\d{9,}", message = "Το ΑΦΜ δεν μπορεί να είναι μικρότερο απο εννέα ψηφία.")
         String vat,
 
-        @NotNull(message = "Η περιοχή δεν μπορεί να είναι κένη.")
+//        @NotNull(message = "Η περιοχή δεν μπορεί να είναι κένη.")
+        @NotNull
         Long regionId
 ) {
     public static TeacherInsertDTO empty() {
