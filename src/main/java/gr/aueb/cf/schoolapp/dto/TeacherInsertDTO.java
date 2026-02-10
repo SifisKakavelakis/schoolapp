@@ -8,14 +8,14 @@ public record TeacherInsertDTO(
 
 //        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
         @NotNull
-        @Size
+        @Size(min = 2)
 //        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
         String firstname,
 
 //        @NotNull(message = "Το όνομα δεν μπορεί να είναι κενί")
 //        @Size(min = 2, message = "Το όνομα πρέπει να περιέχει τουλάχιστον δύο χαρακτήρες")
         @NotNull
-        @Size
+        @Size(min = 2)
         String lastname,
 
         @Pattern(regexp = "\\d{9,}")
