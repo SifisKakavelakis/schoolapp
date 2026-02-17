@@ -54,7 +54,7 @@ public class TeacherService implements ITeacherService {
             region.addTeacher(teacher);
             teacherRepository.save(teacher);        // saved teacher
             log.info("Teacher with vat={} saved successfully", dto.vat());
-            return mapper.mapToTeacherReadOnlyDto(teacher);
+            return mapper.mapToTeacherReadOnlyDTO(teacher);
         } catch (EntityAlreadyExistsException e) {
             log.error("Save failed for teacher with vat={}. Teacher already exists", dto.vat(), e);     // Structured Logging
             throw e;
@@ -75,14 +75,15 @@ public class TeacherService implements ITeacherService {
     public Page<TeacherReadOnlyDTO> getPaginatedTeachers(Pageable pageable) {
         Page<Teacher> teachersPage = teacherRepository.findAll(pageable);
         log.debug("Get paginated returned successfully page={} and size={}", teachersPage.getNumber(), teachersPage.getSize());
-        return teachersPage.map(mapper::mapToTeacherReadOnlyDto);
+        return teachersPage.map(mapper::mapToTeacherReadOnlyDTO);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<TeacherReadOnlyDTO> getPaginatedTeachersDeletedFalse(Pageable pageable) {
         Page<Teacher> teachersPage = teacherRepository.findAllByDeletedFalse(pageable);
         log.debug("Get paginated not deleted returned successfully page={} and size={}", teachersPage.getNumber(), teachersPage.getSize());
-        return teachersPage.map(mapper::mapToTeacherReadOnlyDto);
+        return teachersPage.map(mapper::mapToTeacherReadOnlyDTO);
     }
 
     @Override
@@ -114,7 +115,7 @@ public class TeacherService implements ITeacherService {
 
             teacherRepository.save(teacher);    // προαιρετικό
             log.info("Teacher with uuid={} updated successfully", dto.uuid());
-            return mapper.mapToTeacherReadOnlyDto(teacher);
+            return mapper.mapToTeacherReadOnlyDTO(teacher);
         } catch (EntityNotFoundException e) {
             log.error("Update failed for teacher with uuid={}. Teacher not found", dto.uuid(), e);
             throw e;
@@ -138,7 +139,7 @@ public class TeacherService implements ITeacherService {
             // No save needed if Teacher is managed
 //            teacherRepository.save(teacher);
             log.info("Teacher with uuid={} deleted successfully", uuid);
-            return mapper.mapToTeacherReadOnlyDto(teacher);
+            return mapper.mapToTeacherReadOnlyDTO(teacher);
         } catch (EntityNotFoundException e) {
             log.error("Update failed for teacher with uuid={}. Teacher not found", uuid, e);
 
