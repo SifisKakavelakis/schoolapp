@@ -33,7 +33,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http//                .csrf(AbstractHttpConfigurer::disable)
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/index.html").permitAll()
                         .requestMatchers("/login").permitAll()
@@ -56,7 +57,7 @@ public class SecurityConfig {
                         .failureHandler(authFailureHandler)
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login?logout")    // δουλεύει με post logout
+                        .logoutSuccessUrl("/login?logout=")    // δουλεύει με post logout
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 );
